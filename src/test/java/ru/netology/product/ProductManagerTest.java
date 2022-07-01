@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.netology.repository.ProductManager;
 import ru.netology.repository.ProductRepository;
 
-import java.util.Arrays;
-
 public class ProductManagerTest {
 
     Product item1 = new Book(1, "War&Peace", 1_000, "L.N.Tolstoy");
@@ -19,12 +17,12 @@ public class ProductManagerTest {
     @Test
     public void shouldAddNewProducts() {
         ProductManager manager = new ProductManager(new ProductRepository());
-        manager.addNewProducts (item1);
-        manager.addNewProducts (item2);
-        manager.addNewProducts (item3);
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item2);
+        manager.addNewProducts(item3);
 
-        Product [] expected = {item1, item2, item3};
-        Product [] actual = manager.getSavedProducts();
+        Product[] expected = {item1, item2, item3};
+        Product[] actual = manager.getSavedProducts();
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -32,43 +30,84 @@ public class ProductManagerTest {
     @Test
     public void shouldAddNewProductsAndRemove() {
         ProductManager manager = new ProductManager(new ProductRepository());
-        manager.addNewProducts (item1);
-        manager.addNewProducts (item2);
-        manager.addNewProducts (item3);
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item2);
+        manager.addNewProducts(item3);
         manager.removeProductById(item2.getId());
 
-        Product [] expected = {item1, item3};
-        Product [] actual = manager.getSavedProducts();
+        Product[] expected = {item1, item3};
+        Product[] actual = manager.getSavedProducts();
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldSearchedItemByRequestIfItemIsPresent () {
+    public void shouldSearchedItemByRequestIfItemIsPresent_1() {
         ProductManager manager = new ProductManager(new ProductRepository());
         manager.addNewProducts(item1);
         manager.addNewProducts(item2);
         manager.addNewProducts(item3);
 
 
-        Product [] expected = {item2};
-        Product [] actual = manager.searchBy("A.S.Pushkin");
+        Product[] expected = {item2};
+        Product[] actual = manager.searchBy("A.S.Pushkin");
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldSearchedItemByRequestIfItemIsNotPresent () {
+    public void shouldSearchedItemByRequestIfItemIsPresent_2() {
         ProductManager manager = new ProductManager(new ProductRepository());
         manager.addNewProducts(item1);
         manager.addNewProducts(item2);
         manager.addNewProducts(item3);
 
 
-        Product [] expected = {null};
-        Product [] actual = manager.searchBy("Viy");
+        Product[] expected = {item3};
+        Product[] actual = manager.searchBy("Hamlet");
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldSearchedItemByRequestIfItemIsPresent_3() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item4);
+        manager.addNewProducts(item5);
+
+
+        Product[] expected = {item4};
+        Product[] actual = manager.searchBy("J7");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchedItemByRequestIfItemIsPresent_4() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item4);
+        manager.addNewProducts(item5);
+
+
+        Product[] expected = {item5};
+        Product[] actual = manager.searchBy("Apple");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchedItemByRequestIfItemIsNotPresent() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item2);
+        manager.addNewProducts(item3);
+
+
+        Product[] expected = {null};
+        Product[] actual = manager.searchBy("Viy");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }

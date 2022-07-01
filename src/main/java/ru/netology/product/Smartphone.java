@@ -1,19 +1,19 @@
 package ru.netology.product;
 
 public class Smartphone extends Product {
-    protected static String manufacturer;
+    protected String manufacturer;
 
-    public Smartphone (int id, String name, int price, String manufacturer) {
+    public Smartphone(int id, String name, int price, String manufacturer) {
         super(id, name, price);
-        Smartphone.manufacturer = manufacturer;
+        this.manufacturer = manufacturer;
     }
 
-    public static String getManufacturer() {
+    public String getManufacturer() {
         return manufacturer;
     }
 
     public void setManufacturer(String manufacturer) {
-        Smartphone.manufacturer = manufacturer;
+        this.manufacturer = manufacturer;
     }
 
     @Override

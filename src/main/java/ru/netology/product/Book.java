@@ -1,20 +1,21 @@
 package ru.netology.product;
 
 public class Book extends Product {
-    protected static String author;
+    protected String author;
 
     public Book(int id, String name, int price, String author) {
         super(id, name, price);
-        Book.author = author;
+        this.author = author;
     }
 
-    public static String getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
     public void setAuthor(String author) {
-        Book.author = author;
+        this.author = author;
     }
+
     @Override
     public boolean matches(Product product, String search) {
         if (super.matches(product, search)) {
