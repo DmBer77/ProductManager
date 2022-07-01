@@ -2,18 +2,20 @@ package ru.netology.product;
 
 import ru.netology.repository.ProductRepository;
 
+import java.util.Collection;
+
 public class Product {
     protected int id;
     protected String name;
     protected int price;
 
     public Product(int id, String name, int price) {
-       this.id = id;
-       this.name = name;
-       this.price = price;
+        this.id = id;
+        this.name = name;
+        this.price = price;
     }
 
-     public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -35,6 +37,14 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public boolean matches(Product product, String search) {
+        if (product.getName().contains(search)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

@@ -5,11 +5,15 @@ import org.junit.jupiter.api.Test;
 import ru.netology.repository.ProductManager;
 import ru.netology.repository.ProductRepository;
 
+import java.util.Arrays;
+
 public class ProductManagerTest {
 
-    Product item1 = new Product(1, "War&Peace", 1_000);
-    Product item2 = new Product(2, "Onegin", 1_100);
-    Product item3 = new Product(3, "Hamlet", 1_200);
+    Product item1 = new Book(1, "War&Peace", 1_000, "L.N.Tolstoy");
+    Product item2 = new Book(2, "Onegin", 1_100, "A.S.Pushkin");
+    Product item3 = new Book(3, "Hamlet", 1_200, "W. Shakespeare");
+    Product item4 = new Smartphone(4, "J7", 22_000, "Samsung");
+    Product item5 = new Smartphone(5, "12", 50_000, "Apple");
 
 
     @Test
@@ -45,10 +49,10 @@ public class ProductManagerTest {
         manager.addNewProducts(item1);
         manager.addNewProducts(item2);
         manager.addNewProducts(item3);
-        manager.searchBy("Onegin");
+
 
         Product [] expected = {item2};
-        Product [] actual = manager.searchBy("Onegin");
+        Product [] actual = manager.searchBy("A.S.Pushkin");
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -59,11 +63,12 @@ public class ProductManagerTest {
         manager.addNewProducts(item1);
         manager.addNewProducts(item2);
         manager.addNewProducts(item3);
-        manager.searchBy("Viy");
+
 
         Product [] expected = {null};
         Product [] actual = manager.searchBy("Viy");
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
 }

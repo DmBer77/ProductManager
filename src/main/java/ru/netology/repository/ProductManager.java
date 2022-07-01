@@ -1,6 +1,9 @@
 package ru.netology.repository;
 
 import ru.netology.product.Product;
+import ru.netology.product.Book;
+import ru.netology.product.Smartphone;
+
 
 public class ProductManager {
 
@@ -38,8 +41,10 @@ public class ProductManager {
     public boolean matches(Product product, String search) {
         if (product.getName().contains(search)) {
             return true;
-        } else {
-            return false;
         }
+        if (Book.getAuthor().contains(search)) {
+            return true;
+        }
+        return Smartphone.getManufacturer().contains(search);
     }
 }

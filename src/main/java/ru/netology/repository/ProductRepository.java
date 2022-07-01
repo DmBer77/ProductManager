@@ -1,8 +1,10 @@
 package ru.netology.repository;
+
 import ru.netology.product.Product;
 
 public class ProductRepository {
-    private Product [] items = new Product [0];
+
+    protected Product [] items = new Product [0];
 
     public void addNewProducts(Product productForAdd) {
         Product[] tmp = new Product[items.length + 1];
