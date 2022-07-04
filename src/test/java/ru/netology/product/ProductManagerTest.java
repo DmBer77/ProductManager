@@ -40,28 +40,71 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldSearchedItemByRequestIfItemIsPresent () {
+    public void shouldSearchedItemByRequestIfNoProductsInArray () {
         ProductManager manager = new ProductManager(new ProductRepository());
-        manager.addNewProducts(item1);
-        manager.addNewProducts(item2);
-        manager.addNewProducts(item3);
-        manager.searchBy("Onegin");
 
-        Product [] expected = {item2};
+        Product [] expected = {};
         Product [] actual = manager.searchBy("Onegin");
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldSearchedItemByRequestIfItemIsNotPresent () {
+    public void shouldSearchedItemByRequestIfOneProductInArrayAndOneItemIsPresent() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+
+        Product [] expected = {item1};
+        Product [] actual = manager.searchBy("War&Peace");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchedItemByRequestIfOneProductInArrayAndNoItemIsPresent() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+
+        Product [] expected = {};
+        Product [] actual = manager.searchBy("Onegin");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchedItemByRequestIfSomeProductsInArrayAndOneItemIsPresent () {
         ProductManager manager = new ProductManager(new ProductRepository());
         manager.addNewProducts(item1);
         manager.addNewProducts(item2);
         manager.addNewProducts(item3);
-        manager.searchBy("Viy");
 
-        Product [] expected = {null};
+        Product [] expected = {item2};
+        Product [] actual = manager.searchBy("Onegin");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldSearchedItemByRequestIfSomeProductsInArrayAndSomeItemsArePresent () {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item2);
+        manager.addNewProducts(item3);
+        manager.addNewProducts(item2);
+
+        Product [] expected = {item2, item2};
+        Product [] actual = manager.searchBy("Onegin");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchedItemByRequestIfSomeProductsInArrayButItemIsNotPresent () {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item2);
+        manager.addNewProducts(item3);
+
+        Product [] expected = {};
         Product [] actual = manager.searchBy("Viy");
 
         Assertions.assertArrayEquals(expected, actual);
