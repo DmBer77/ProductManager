@@ -7,9 +7,11 @@ import ru.netology.repository.ProductRepository;
 
 public class ProductManagerTest {
 
-    Product item1 = new Product(1, "War&Peace", 1_000);
-    Product item2 = new Product(2, "Onegin", 1_100);
-    Product item3 = new Product(3, "Hamlet", 1_200);
+    Product item1 = new Book(1, "War&Peace", 1_000, "L.N.Tolstoy");
+    Product item2 = new Book(2, "Onegin", 1_100, "A.S.Pushkin");
+    Product item3 = new Book(3, "Hamlet", 1_200, "W. Shakespeare");
+    Product item4 = new Smartphone(4, "J7", 22_000, "Samsung");
+    Product item5 = new Smartphone(5, "12", 50_000, "Apple");
 
 
     @Test
@@ -107,6 +109,46 @@ public class ProductManagerTest {
 
         Product[] expected = {};
         Product[] actual = manager.searchBy("Viy");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchedItemByRequestIfProductsInArrayButSearchingBySecondParam_1() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item2);
+        manager.addNewProducts(item3);
+
+
+        Product[] expected = {item2};
+        Product[] actual = manager.searchBy("A.S.Pushkin");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldSearchedItemByRequestIfProductsInArrayButSearchingBySecondParam_2() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item4);
+        manager.addNewProducts(item5);
+
+
+        Product[] expected = {item4};
+        Product[] actual = manager.searchBy("J7");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldSearchedItemByRequestIfProductsInArrayButSearchingBySecondParam_3() {
+        ProductManager manager = new ProductManager(new ProductRepository());
+        manager.addNewProducts(item1);
+        manager.addNewProducts(item4);
+        manager.addNewProducts(item5);
+
+
+        Product[] expected = {item5};
+        Product[] actual = manager.searchBy("Apple");
 
         Assertions.assertArrayEquals(expected, actual);
     }
