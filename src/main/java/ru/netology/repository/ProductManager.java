@@ -26,6 +26,7 @@ public class ProductManager {
     }
 
     public Product[] searchBy(String text) {
+
         Product[] result = new Product [0];
         for (Product product: repository.getSavedProducts()) {
             if (matches(product, text)) {
@@ -42,6 +43,7 @@ public class ProductManager {
 
     public boolean matches(Product product, String search) {
 
+
         if (product.getName().contains(search)) {
             return true;
         }
@@ -54,5 +56,8 @@ public class ProductManager {
             return ((Smartphone) product).getManufacturer().contains(search);
         }
         return false;
+
+        return product.getName().contains(search);
+
     }
 }
