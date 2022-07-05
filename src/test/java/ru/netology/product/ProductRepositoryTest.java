@@ -2,6 +2,7 @@ package ru.netology.product;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.netology.repository.AlreadyExistsException;
 import ru.netology.repository.NotFoundException;
 import ru.netology.repository.ProductRepository;
 
@@ -14,7 +15,7 @@ public class ProductRepositoryTest {
     Product item5 = new Smartphone(5, "12", 50_000, "Apple");
 
     @Test
-    public void shouldTryToRemoveProductFromArrayIfItemIsPresent () {
+    public void shouldTryToRemoveProductFromArrayIfItemIsPresent() {
         ProductRepository repository = new ProductRepository();
         repository.addNewProducts(item1);
         repository.addNewProducts(item2);
@@ -28,7 +29,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void shouldTryToRemoveProductFromArrayIfItemIsNotPresent () {
+    public void shouldTryToRemoveProductFromArrayIfItemIsNotPresent() {
         ProductRepository repository = new ProductRepository();
         repository.addNewProducts(item1);
         repository.addNewProducts(item2);
@@ -37,6 +38,31 @@ public class ProductRepositoryTest {
 
         Assertions.assertThrows(NotFoundException.class, () -> {
             repository.removeProductById(8);
+        });
+    }
+
+    @Test
+    public void shouldTryToAddProductToArrayIfItemIsNotAlreadyPresent() {
+        ProductRepository repository = new ProductRepository();
+        repository.addNewProducts(item1);
+        repository.addNewProducts(item2);
+        repository.addNewProducts(item5);
+
+        Product[] expected = {item1, item2, item5};
+        Product[] actual = repository.getSavedProducts();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldTryToAddProductToArrayIfItemIsAlreadyPresent() {
+        ProductRepository repository = new ProductRepository();
+        repository.addNewProducts(item1);
+        repository.addNewProducts(item2);
+        repository.addNewProducts(item3);
+
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repository.addNewProducts(item3);
         });
     }
 }
