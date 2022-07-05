@@ -16,6 +16,10 @@ public class ProductManager {
         repository.addNewProducts(productForAdd);
     }
 
+    public void addNewProductsWhenMoreThanOneSimilarItemIsPresent (Product productForAdd) {
+        repository.addNewProductsWhenMoreThanOneSimilarItemIsPresent(productForAdd);
+    }
+
     public void removeProductById (int id) {
         repository.removeProductById(id);
     }

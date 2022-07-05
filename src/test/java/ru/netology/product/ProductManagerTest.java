@@ -2,6 +2,7 @@ package ru.netology.product;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.netology.repository.AlreadyExistsException;
 import ru.netology.repository.ProductManager;
 import ru.netology.repository.ProductRepository;
 
@@ -92,12 +93,17 @@ public class ProductManagerTest {
         manager.addNewProducts(item1);
         manager.addNewProducts(item2);
         manager.addNewProducts(item3);
-        manager.addNewProducts(item2);
+        manager.addNewProductsWhenMoreThanOneSimilarItemIsPresent(item2);
+
 
         Product[] expected = {item2, item2};
         Product[] actual = manager.searchBy("Onegin");
 
         Assertions.assertArrayEquals(expected, actual);
+
+//        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+//            manager.addNewProducts(item2);
+//        });
     }
 
     @Test
