@@ -2,7 +2,6 @@ package ru.netology.product;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.netology.repository.AlreadyExistsException;
 import ru.netology.repository.ProductManager;
 import ru.netology.repository.ProductRepository;
 
@@ -101,9 +100,6 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
 
-//        Assertions.assertThrows(AlreadyExistsException.class, () -> {
-//            manager.addNewProducts(item2);
-//        });
     }
 
     @Test
@@ -132,6 +128,7 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void shouldSearchedItemByRequestIfProductsInArrayButSearchingBySecondParam_2() {
         ProductManager manager = new ProductManager(new ProductRepository());
@@ -145,6 +142,7 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void shouldSearchedItemByRequestIfProductsInArrayButSearchingBySecondParam_3() {
         ProductManager manager = new ProductManager(new ProductRepository());
