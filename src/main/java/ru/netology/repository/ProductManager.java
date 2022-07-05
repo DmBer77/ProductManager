@@ -8,30 +8,30 @@ public class ProductManager {
 
     private final ProductRepository repository;
 
-    public ProductManager (ProductRepository repository) {
+    public ProductManager(ProductRepository repository) {
         this.repository = repository;
     }
 
-    public void addNewProducts (Product productForAdd) {
+    public void addNewProducts(Product productForAdd) {
         repository.addNewProducts(productForAdd);
     }
 
-    public void addNewProductsWhenMoreThanOneSimilarItemIsPresent (Product productForAdd) {
+    public void addNewProductsWhenMoreThanOneSimilarItemIsPresent(Product productForAdd) {
         repository.addNewProductsWhenMoreThanOneSimilarItemIsPresent(productForAdd);
     }
 
-    public void removeProductById (int id) {
+    public void removeProductById(int id) {
         repository.removeProductById(id);
     }
 
-    public Product [] getSavedProducts () {
+    public Product[] getSavedProducts() {
         return repository.getSavedProducts();
     }
 
     public Product[] searchBy(String text) {
 
-        Product[] result = new Product [0];
-        for (Product product: repository.getSavedProducts()) {
+        Product[] result = new Product[0];
+        for (Product product : repository.getSavedProducts()) {
             if (matches(product, text)) {
                 Product[] tmp = new Product[result.length + 1];
                 for (int i = 0; i < result.length; i++) {
